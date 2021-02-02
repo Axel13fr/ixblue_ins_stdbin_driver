@@ -9,6 +9,10 @@ float64     longitude    # In degrees, increasgin toward east, [0,360]
 int8        altitude_ref # 0: Geoid / 1: Ellipsoid, see constant above.
 float32     altitude     # In meters, positive up
 
+# Heave
+float32     rt_heave_at_bdl
+float32     smart_heave_m
+
 # Position Deviation
 float64[9] position_covariance # In square meters, ENU in row-major order
                                 # Null matrix if unknown

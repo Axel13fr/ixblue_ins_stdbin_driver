@@ -366,7 +366,9 @@ ROSPublisher::toiXInsMsg(const ixblue_stdbin_decoder::Data::BinaryNav& navData)
     if(navData.position.is_initialized() == false ||
        navData.attitudeHeading.is_initialized() == false ||
        navData.speedVesselFrame.is_initialized() == false ||
-       navData.insUserStatus.is_initialized() == false)
+       navData.insUserStatus.is_initialized() == false ||
+       navData.smartHeave.is_initialized() == false ||
+       navData.rtHeaveSurgeSway.is_initialized() == false)
     {
         return nullptr;
     }
@@ -379,6 +381,10 @@ ROSPublisher::toiXInsMsg(const ixblue_stdbin_decoder::Data::BinaryNav& navData)
     res->longitude = navData.position.get().longitude_deg;
     res->altitude_ref = navData.position.get().altitude_ref;
     res->altitude = navData.position.get().altitude_m;
+
+    // --- Heave
+    res->rt_heave_at_bdl = navData.rtHeaveSurgeSway.get().rt_heave_atBdL;
+    res->smart_heave_m = navData.smartHeave.get().smartHeave_m;
 
     // --- Position SD
     if(navData.positionDeviation.is_initialized() == false)
